@@ -1,0 +1,11 @@
+{% extends 'body.html.twig' %}
+
+{% block content %}
+
+    <h3>Meest bekeken auto's</h3>
+
+    {% include 'widgets/carousel.html.twig' with {'items': images} %}
+
+    <p>Dit is de index pagina.</p>
+
+{% endblock %}

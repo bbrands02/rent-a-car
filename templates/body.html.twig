@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include 'menu/header.html.twig' %}
+    <div class="wrapper-background">
+        <div id="wrapper" class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 p-4">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+    </div>
+
+    {% include 'menu/footer.html.twig' %}
+
+{% endblock %}

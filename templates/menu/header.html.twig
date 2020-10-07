@@ -1,0 +1,26 @@
+<div class="header-background">
+    <header id="header-wrapper" class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <div class="row d-flex justify-content-center">
+
+            <h1 class="title text-center">{{ app_name }}</h1>
+
+            <ul class="menu col-12 d-flex justify-content-between">
+                <li><a href="/">Home</a></li>
+                <li><a href="/cars">Cars</a></li>
+                <li><a href="#">Contact</a></li>
+                {% if app.user is not null %}
+                <li class="user-link"><i style="padding-left: 10px" class="fa fa-user"></i> <a
+                            href="/user">Dashboard</a></li>
+                <li class="user-link"><a href="/logout">Logout</a></li>
+                {% else %}
+                <li class="user-link"><a href="/user/login">Login</a></li>
+                {% endif %}
+                <li>
+                    <button id="darkModeButton" onclick="toggleDarkMode()"><i style="font-size: 30px"
+                                                                              class="fa fa-lightbulb-o"></i></button>
+                </li>
+            </ul>
+
+        </div>
+    </header>
+</div>

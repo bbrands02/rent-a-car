@@ -1,0 +1,38 @@
+<div class="footer-background">
+    <footer id="footer-wrapper" class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+
+        <div class="row">
+            <div class="footer-part col-12 col-sm-4">
+                <h4>Menu</h4>
+                <ul class="footer-menu ">
+                    <li><a href="/"><i class="fa fa-arrow-right p-2"></i>Home </a></li>
+                    <li><a href="/cars"><i class="fa fa-arrow-right p-2"></i>Cars </a></li>
+                    <li><a href="#"><i class="fa fa-arrow-right p-2"></i>Contact </a></li>
+                    <li><a href="#"><i class="fa fa-arrow-right p-2"></i>Login </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-part col-12 col-sm-4">
+                <h4>Contact</h4>
+                <ul class="footer-menu">
+                    <li><a href="tel:+31 12345678"><i class="fa fa-phone p-2"></i>+31 12345678 </a></li>
+                    <li><a href="mailto:info@rentacar.com"><i class="fa fa-mail-forward p-2"></i>info@rentacar.com</a></li>
+                    <li><a href="#"><i class="fa fa-location-arrow p-2"></i>1234 AB, Amsterdam </a></li>
+                    <li><a href="#"><i class="fa fa-location-arrow p-2"></i>Appelstraat 21 </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-part col-12 col-sm-4">
+                <h4>Location</h4>
+                {% include 'widgets/geolocation_map.html.twig' with {
+                    'id': 'rac_location',
+                    'height': '175px',
+                    'width': '300px',
+                    'lat': 52.3734085,
+                    'long': 4.898273760600533,
+                    'zoom': 20
+                } %}
+            </div>
+        </div>
+    </footer>
+</div>
