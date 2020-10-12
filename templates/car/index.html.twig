@@ -2,6 +2,45 @@
 
 {% block content %}
 
-    <p>Dit is de cars pagina.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Alle auto's van Rent a Car:</h4>
+            {% if cars is defined and cars is not empty %}
+            <form method="post" action="{{ path('app_car_index') }}">
+                <ol>
+                    {% for car in cars %}
+                        <li>{{ car.name }}
+                            <button type="submit" name="deletedCar[id]" value="{{ car.id }}"><i style="color: red" class="fa fa-trash"></i>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ol>
+                {% else %}
+                    <p>Er zijn momenteel geen auto's van Rent a Car.</p>
+                {% endif %}
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form method="post" action="{{ path('app_car_index') }}">
+                <h4>Auto toevoegen:</h4>
+                <div class="form-group">
+                    <label for="carName">Naam:</label>
+                    <input id="carName" class="form-control" type="text" name="newCar[name]">
+                </div>
+                <div class="form-group">
+                    <label for="carDescription">Beschrijving:</label>
+                    <textarea id="carDescription" class="form-control" type="text"
+                              name="newCar[description]"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="carColor">Kleur:</label>
+                    <input id="carColor" class="form-control" type="text" name="newCar[color]">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
