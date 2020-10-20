@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CarRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
@@ -11,9 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Car
 {
     /**
+     * @var \Ramsey\Uuid\UuidInterface
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -32,7 +36,7 @@ class Car
      */
     private $color;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
