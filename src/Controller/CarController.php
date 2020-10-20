@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\ObjectService;
 
 class CarController extends AbstractController
 {
@@ -19,39 +20,45 @@ class CarController extends AbstractController
      * @Route("/cars")
      * @Template
      */
-    public function indexAction(Request $req, EntityManagerInterface $em)
+    public function indexAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         $variables['title'] = 'Cars';
-        $repo = $this->getDoctrine()->getRepository(Car::class);
+        $variables['cars'] = $os->getAll('car');
 
+        return $variables;
+    }
+
+    /**
+     * @Route("/upload-car")
+     */
+    public function uploadCarAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
         if ($req->isMethod('POST')) {
             $object = $req->request->all();
 
-            if (!empty($object['newCar'])) {
-                $car = new Car();
-                if (!empty($object['newCar']['name'])) {
-                    $car->setName($object['newCar']['name']);
-                }
-                if (!empty($object['newCar']['description'])) {
-                    $car->setDescription($object['newCar']['description']);
-                }
-                if (!empty($object['newCar']['color'])) {
-                    $car->setColor($object['newCar']['color']);
-                }
-                $em->persist($car);
-                $em->flush();
-                $req->request->remove('newCar');
-            } elseif (!empty($object['deletedCar'])) {
-                $deletedObject = $repo->find($object['deletedCar']['id']);
+            $os->uploadObject($object);
+        }
+
+        return $this->redirectToRoute('app_car_index');
+    }
+
+    /**
+     * @Route("/delete-car")
+     */
+    public function deleteCarAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
+        if ($req->isMethod('POST')) {
+            $repo = $this->getDoctrine()->getRepository(Car::class);
+            $object = $req->request->all();
+
+            if (!empty($object)) {
+                $deletedObject = $repo->find($object['id']);
+
                 $em->remove($deletedObject);
                 $em->flush();
-                $req->request->remove('deletedCar');
             }
         }
 
-        $variables['cars'] = $repo
-            ->findAll();
-        
-        return $variables;
+        return $this->redirectToRoute('app_car_index');
     }
 }
