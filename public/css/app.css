@@ -173,6 +173,22 @@ body, #wrapper {
     color: var(--primary-bg);
 }
 
+.delete-obj-button {
+    float: right;
+    border: none;
+    background: var(--primary-color);
+    border-radius: 6px;
+}
+
+.delete-obj-button:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.delete-obj-button:hover  i  {
+    color: red !important;
+}
+
 @media (prefers-color-scheme: dark) {
     :root.darkmode {
         --main-bg-color: coral;
