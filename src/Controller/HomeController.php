@@ -4,10 +4,12 @@
 namespace App\Controller;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController
+class HomeController extends AbstractController
 {
     private $session;
 
@@ -15,7 +17,8 @@ class HomeController
      * @Route("/")
      * @Template
      */
-    public function indexAction() {
+    public function indexAction(EntityManagerInterface $em)
+    {
         $variables['title'] = "Home";
 
         $variables['images'][0]['src'] = '/images/car_1.jpg';
