@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
+use App\Service\ObjectService;
 
 class SecurityController extends AbstractController
 {
@@ -58,6 +61,23 @@ class SecurityController extends AbstractController
         $variables['title'] = 'Mijn pagina';
 
         return $variables;
+    }
+
+    /**
+     * @Route("/create-user")
+     */
+    public function makeUserAction(Request $req, EntityManagerInterface $em, ObjectService $os) {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_security_user');
+        }
+
+        if ($req->isMethod('POST')) {
+            $object = $req->request->all();
+
+            $os->uploadObject($object);
+        }
+
+        return $this->redirectToRoute('app_login');
     }
 
 
