@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ObjectService extends AbstractController
 {
@@ -17,13 +18,19 @@ class ObjectService extends AbstractController
      * @var EntityManagerInterface
      */
     private $em;
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $pe;
 
     public function __construct
     (
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        UserPasswordEncoderInterface $pe
     )
     {
         $this->em = $em;
+        $this->pe = $pe;
     }
 
     // Fetches the right repository for this type
