@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Entity\Car;
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,12 +57,16 @@ class ObjectService extends AbstractController
     // Uploads object (needs type from html form)
     public function uploadObject($object)
     {
+        $type = $object['type'];
         $object['type'] = "App\\Entity\\".ucwords($object['type']);
 
         $newObject = $this->createProperties($object);
 
         $this->em->persist($newObject);
         $this->em->flush();
+//        if() {
+//            $this->addFlash('succes', ucwords($type).' successfully created');
+//        };
 
         return;
     }
@@ -79,6 +84,12 @@ class ObjectService extends AbstractController
         }
         if (!empty($obj['color'])) {
             $newObject->setColor($obj['color']);
+        }
+        if (!empty($obj['email'])) {
+            $newObject->setEmail($obj['email']);
+        }
+        if (!empty($obj['password'])) {
+            $newObject->setPassword($this->pe->encodePassword($newObject, $obj['password']));
         }
 
         return $newObject;
