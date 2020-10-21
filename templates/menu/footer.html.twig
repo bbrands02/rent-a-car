@@ -5,10 +5,16 @@
             <div class="footer-part col-12 col-sm-4">
                 <h4>Menu</h4>
                 <ul class="footer-menu ">
-                    <li><a href="/"><i class="fa fa-arrow-right p-2"></i>Home </a></li>
-                    <li><a href="/cars"><i class="fa fa-arrow-right p-2"></i>Cars </a></li>
+                    <li><a href="{{ path('app_home_index') }}"><i class="fa fa-arrow-right p-2"></i>Home </a></li>
+                    <li><a href="{{ path('app_car_index') }}"><i class="fa fa-arrow-right p-2"></i>Cars </a></li>
                     <li><a href="#"><i class="fa fa-arrow-right p-2"></i>Contact </a></li>
-                    <li><a href="#"><i class="fa fa-arrow-right p-2"></i>Login </a></li>
+                    {% if app.user is not empty %}
+                        <li><a href="{{ path('app_security_user') }}"><i class="fa fa-arrow-right p-2"></i>Mijn pagina</a>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ path('app_login') }}"><i class="fa fa-arrow-right p-2"></i>Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -16,7 +22,8 @@
                 <h4>Contact</h4>
                 <ul class="footer-menu">
                     <li><a href="tel:+31 12345678"><i class="fa fa-phone p-2"></i>+31 12345678 </a></li>
-                    <li><a href="mailto:info@rentacar.com"><i class="fa fa-mail-forward p-2"></i>info@rentacar.com</a></li>
+                    <li><a href="mailto:info@rentacar.com"><i class="fa fa-mail-forward p-2"></i>info@rentacar.com</a>
+                    </li>
                     <li><a href="#"><i class="fa fa-location-arrow p-2"></i>1234 AB, Amsterdam </a></li>
                     <li><a href="#"><i class="fa fa-location-arrow p-2"></i>Appelstraat 21 </a></li>
                 </ul>
