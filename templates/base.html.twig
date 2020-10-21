@@ -20,11 +20,11 @@
 
         {# CSS #}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
               rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {# JS #}
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -42,8 +42,6 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-{#    {{ dump(geolocations) }}#}
-{#    {% include 'widgets/geolocations.html.twig' with {'geolocations': geolocations} %}#}
 {% endblock %}
 </body>
 </html>
