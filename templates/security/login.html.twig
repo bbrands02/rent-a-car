@@ -27,22 +27,21 @@
             <div class="form-group">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             </div>
-
-            <p> of </p>
-
-            <a href="{{ path('app_register') }}">Sign up</a>
-
             {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
                See https://symfony.com/doc/current/security/remember_me.html #}
 
-{#            <div class="form-check mb-3">#}
-{#                <input id="rememberMeInput" class="form-check-input" type="checkbox" name="_remember_me">#}
-{#                <label for="rememberMeInput" class="form-check-label">Remember me</label>#}
-{#            </div>#}
+            {#            <div class="form-check mb-3">#}
+            {#                <input id="rememberMeInput" class="form-check-input" type="checkbox" name="_remember_me">#}
+            {#                <label for="rememberMeInput" class="form-check-label">Remember me</label>#}
+            {#            </div>#}
 
-            <button class="btn btn-lg btn-primary submit-button" type="submit">
-                Sign in
-            </button>
+            <div class="row">
+                <button class="btn btn-lg btn-primary submit-button" type="submit">
+                    Sign in
+                </button>
+                <p class="ml-3 mr-3 mt-3"> or </p>
+                <a href="{{ path('app_register') }}" class="submit-button">Sign up</a>
+            </div>
         </form>
 
     </div>
