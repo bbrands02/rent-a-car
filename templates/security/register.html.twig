@@ -1,0 +1,15 @@
+{% extends 'body.html.twig' %}
+
+{% block content %}
+    {#            {% if error %}#}
+    {#                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+    {#            {% endif %}#}
+
+    <div class="col-md-12">
+        <form method="post" action="{{ path('app_register') }}">
+            <h3>Register on this page</h3>
+
+        </form>
+    </div>
+
+{% endblock %}
