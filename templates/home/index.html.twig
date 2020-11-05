@@ -2,10 +2,8 @@
 
 {% block content %}
 
-    <h3>Meest bekeken auto's</h3>
+    <h3 class="mb-3 text-center">Meest bekeken auto's</h3>
 
-    {% include 'widgets/carousel.html.twig' with {'items': images} %}
-
-    <p>Dit is de index pagina.</p>
+    {% include 'widgets/carousel.html.twig' with {'items': cars, 'path': 'app_car_car'} %}
 
 {% endblock %}
