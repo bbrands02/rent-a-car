@@ -1,0 +1,47 @@
+{% extends 'body.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Alle auto's van Rent a Car:</h4>
+            {% if cars is defined and cars is not empty %}
+            <form method="post" action="{{ path('app_car_deletecar') }}">
+                <ol>
+                    {% for car in cars %}
+                        <li style="margin-bottom: 5px">{{ car.name }}
+                            <button class="delete-obj-button" type="submit" name="id" value="{{ car.id }}"><i style="color: darkred" class="fa fa-trash"></i>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ol>
+                {% else %}
+                    <p>Er zijn momenteel geen auto's van Rent a Car.</p>
+                {% endif %}
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form method="post" action="{{ path('app_car_uploadcar') }}">
+                <h4>Auto toevoegen:</h4>
+                <div class="form-group">
+                    <label for="carName">Naam:</label>
+                    <input id="carName" class="form-control" type="text" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="carDescription">Beschrijving:</label>
+                    <textarea id="carDescription" class="form-control" type="text"
+                              name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="carColor">Kleur:</label>
+                    <input id="carColor" class="form-control" type="text" name="color">
+                </div>
+                <input type="hidden" name="type" value="car">
+                <div class="form-group">
+                    <button type="submit" class="form-control">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
