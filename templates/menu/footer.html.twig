@@ -9,7 +9,9 @@
                     <li><a href="{{ path('app_car_index') }}"><i class="fa fa-arrow-right p-2"></i>Cars </a></li>
                     <li><a href="#"><i class="fa fa-arrow-right p-2"></i>Contact </a></li>
                     {% if app.user is not empty %}
-                        <li><a href="{{ path('app_security_user') }}"><i class="fa fa-arrow-right p-2"></i>Mijn pagina</a>
+                        <li><a href="{{ path('app_security_user') }}"><i class="fa fa-arrow-right p-2"></i>Profile</a>
+                        </li>
+                        <li><a href="{{ path('app_dashboard_index') }}"><i class="fa fa-arrow-right p-2"></i>Dashboard</a>
                         </li>
                     {% else %}
                         <li><a href="{{ path('app_login') }}"><i class="fa fa-arrow-right p-2"></i>Login</a>
@@ -36,7 +38,7 @@
                     'height': '175px',
                     'width': '300px',
                     'lat': 52.3734085,
-                    'long': 4.898273760600533,
+                    'long': 4.8932,
                     'zoom': 20
                 } %}
             </div>
