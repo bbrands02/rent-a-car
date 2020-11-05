@@ -1,8 +1,11 @@
-
 /* Color palette: https://colorhunt.co/palette/22272 */
 * {
     box-sizing: border-box;
     font-family: 'Noto Sans', sans-serif;
+}
+
+*:focus {
+    outline: none;
 }
 
 :root {
@@ -25,17 +28,20 @@ body, #wrapper {
     background: var(--bg);
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 #header-wrapper {
     min-width: 900px;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 20px;
-    padding-top: 20px;
     background: var(--primary-bg);
     color: var(--primary-color);
     border-left: 1px solid black;
     border-right: 1px solid black;
+    border-bottom: 1px solid black;
     box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     /*border-top-left-radius: 25px;*/
@@ -75,18 +81,18 @@ body, #wrapper {
 }
 
 .title {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 75px;
     padding-top: 20px;
     color: var(--primary-color);
-    margin-bottom: 20px ;
+    margin-bottom: 20px;
 }
 
 .menu {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
 }
 
 .menu li {
@@ -95,7 +101,7 @@ body, #wrapper {
 }
 
 .menu li a {
-    padding: 0 20px 0 20px;
+    padding: 10px 20px 10px 20px;
     color: var(--primary-color);
     border-radius: 6px;
 }
@@ -116,6 +122,7 @@ body, #wrapper {
     background: var(--primary-color);
     text-decoration: none;
 }
+
 .footer-menu {
     margin-left: 0;
     padding-left: 0 !important;
@@ -165,7 +172,11 @@ body, #wrapper {
     cursor: pointer;
     border-radius: 6px;
     color: var(--primary-color);
-    padding: 0 20px 0 20px;
+    padding: 10px 20px 10px 20px;
+}
+
+#darkModeButton:focus {
+    outline: none;
 }
 
 #darkModeButton:hover {
@@ -185,17 +196,25 @@ body, #wrapper {
     border: 1px solid black;
 }
 
-.delete-obj-button:hover  i  {
+.delete-obj-button:hover i {
     color: red !important;
 }
 
 .submit-button {
     background: var(--primary-bg);
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 12px;
-    padding: 13px 16px 8px 16px;
+    border: 0;
+    border-radius: 8px;
     font-size: 20px;
+    padding: 10px;
+    padding-top: 15px;
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background: var(--primary-color);
+    color: var(--primary-bg);
+    text-decoration: none;
 }
 
 .input-feedback {
@@ -205,6 +224,54 @@ body, #wrapper {
 
 .input-feedback-i {
     display: none;
+}
+
+.carousel-link {
+    background:var(--primary-bg);
+    color:var(--primary-color);
+    padding: 15px 45px 15px 45px;
+    border-radius: 0 0 10px 10px;
+    border: 0 1px 1px 1px solid var(--primary-color);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+.carousel-link:hover {
+    background:var(--primary-color);
+    color: var(--primary-bg);
+    border: 0 1px 1px 1px solid var(--primary-bg);
+    text-decoration: none;
+}
+
+.custom-entity-bg {
+    background: var(--primary-color);
+    border-radius: 12px;
+    border: 1px solid var(--primary-bg);
+}
+
+.custom-entity-bg:hover {
+    background:  var(--primary-bg);
+    border: 1px solid var(--primary-color);
+}
+
+.custom-card-i {
+    color: var(--primary-bg);
+    font-size: 60px;
+}
+
+.custom-card-span {
+    color: var(--primary-bg);
+    font-size: 15px;
+}
+
+.custom-entity-bg:hover .custom-card-i {
+    color: var(--primary-color);
+}
+
+.custom-entity-bg:hover .custom-card-span {
+    color: var(--primary-color);
 }
 
 @media (prefers-color-scheme: dark) {
