@@ -6830,16 +6830,16 @@
         },
         {
             "name": "symfony/uid",
-            "version": "v5.1.7",
+            "version": "v5.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/uid.git",
-                "reference": "a0dc1758c4fd55f27c68861f1b74d654dce59f07"
+                "reference": "d6e033ed0eca26277084f76287c3322dc1d825c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/uid/zipball/a0dc1758c4fd55f27c68861f1b74d654dce59f07",
-                "reference": "a0dc1758c4fd55f27c68861f1b74d654dce59f07",
+                "url": "https://api.github.com/repos/symfony/uid/zipball/d6e033ed0eca26277084f76287c3322dc1d825c2",
+                "reference": "d6e033ed0eca26277084f76287c3322dc1d825c2",
                 "shasum": ""
             },
             "require": {
@@ -6847,11 +6847,6 @@
                 "symfony/polyfill-uuid": "^1.15"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.1-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Uid\\": ""
@@ -6898,7 +6893,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-02T16:23:27+00:00"
+            "time": "2020-10-24T12:01:57+00:00"
         },
         {
             "name": "symfony/validator",
