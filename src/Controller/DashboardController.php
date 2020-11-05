@@ -13,18 +13,58 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\ObjectService;
 
-
-class CarController extends AbstractController
+/**
+ * Class DashboardController
+ * @package App\Controller
+ * @Route("/dashboard")
+ */
+class DashboardController extends AbstractController
 {
+
+    /**
+     * @Route("/")
+     * @Template
+     */
+    public function indexAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $variables['title'] = 'Dashboard';
+
+        return $variables;
+    }
+
+    /**
+     * @Route("/users")
+     * @Template
+     */
+    public function usersAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $variables['title'] = 'Users';
+
+        return $variables;
+    }
+
+    /**
+     * @Route("/users/{id}")
+     * @Template
+     */
+    public function userAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $variables['title'] = 'User';
+
+        return $variables;
+    }
 
     /**
      * @Route("/cars")
      * @Template
      */
-    public function indexAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    public function carsAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $variables['title'] = 'Cars';
-        $variables['cars'] = $os->getAll('car');
 
         return $variables;
     }
@@ -33,55 +73,11 @@ class CarController extends AbstractController
      * @Route("/cars/{id}")
      * @Template
      */
-    public function carAction(Request $req, EntityManagerInterface $em, ObjectService $os, $id)
+    public function carAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
-        $variables['car'] = $os->getOne('car', $id);
-        $variables['title'] = $variables['car']->getName();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $variables['title'] = 'Car';
 
         return $variables;
-    }
-
-    /**
-     * @Route("/upload-car")
-     */
-    public function uploadCarAction(Request $req, EntityManagerInterface $em, ObjectService $os)
-    {
-        if ($req->isMethod('POST')) {
-            $object = $req->request->all();
-            if (empty($object['name'])) {
-                // Needs to be a flash with a return
-                throw new \Exception('Please fill in the name!');
-            }
-
-            $object['image'] = $req->files->get('image');
-            if (!empty($object['image']) && !in_array($object['image']->guessExtension(), array("png", "jpeg", "gif"))) {
-                // Needs to be a flash with a return
-                throw new \Exception('This is not a image!');
-            }
-
-            $os->uploadObject($object);
-        }
-
-        return $this->redirectToRoute('app_car_index');
-    }
-
-    /**
-     * @Route("/delete-car")
-     */
-    public function deleteCarAction(Request $req, EntityManagerInterface $em, ObjectService $os)
-    {
-        if ($req->isMethod('POST')) {
-            $repo = $this->getDoctrine()->getRepository(Car::class);
-            $object = $req->request->all();
-
-            if (!empty($object)) {
-                $deletedObject = $repo->find($object['id']);
-
-                $em->remove($deletedObject);
-                $em->flush();
-            }
-        }
-
-        return $this->redirectToRoute('app_car_index');
     }
 }

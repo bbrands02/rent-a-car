@@ -58,7 +58,7 @@ class SecurityController extends AbstractController
      */
     public function userAction() {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $variables['title'] = 'Mijn pagina';
+        $variables['title'] = 'Profile';
 
         return $variables;
     }
@@ -74,7 +74,15 @@ class SecurityController extends AbstractController
         if ($req->isMethod('POST')) {
             $object = $req->request->all();
 
-            $os->uploadObject($object);
+            if(!empty($object['email']) && !empty($object['password']) && !empty($object['passwordConfirm'])) {
+                if($object['password'] === $object['passwordConfirm']) {
+                    $os->uploadObject($object);
+                } else {
+                    throw new \Exception('Please make sure the passwords are identical.');
+                }
+            } else {
+                throw new \Exception('Please fill in all required fields.');
+            }
         }
 
         return $this->redirectToRoute('app_login');
