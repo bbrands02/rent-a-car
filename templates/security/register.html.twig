@@ -7,7 +7,7 @@
 
     <div class="col-md-12">
         <form method="post" action="{{ path('app_security_makeuser') }}">
-            <h3>Register here</h3>
+            <h1>Register here</h1>
 
             <br>
 
@@ -19,7 +19,7 @@
                         <label for="firstNameInput">Given name * <i id="firstNameFeedbackI"
                                                                     class="fa fa-warning input-feedback-i"></i></label>
                         <input id="firstNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="firstName" #} required>
+                                {# name="firstName" #}autocomplete="off" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -27,7 +27,7 @@
                         <label for="middleNameInput">Middle name <i id="middleNameFeedbackI"
                                                                     class="fa fa-warning input-feedback-i"></i></label>
                         <input id="middleNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="middleName" #} >
+                                {# name="middleName" #}autocomplete="off" >
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -35,7 +35,7 @@
                         <label for="lastNameInput">Last name * <i id="lastNameFeedbackI"
                                                                   class="fa fa-warning input-feedback-i"></i></label>
                         <input id="lastNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="lastName" #} required>
+                                {# name="lastName" #}autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                         <label for="emailInput">E-mail * <i id="emailFeedbackI"
                                                             class="fa fa-warning input-feedback-i"></i></label>
                         <input id="emailInput" onkeyup="validateEmail()" class="form-control" type="text" name="email"
-                               required>
+                               autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="phoneNumberInput">Phone number</label>
-                        <input id="phoneNumberInput" class="form-control" type="tel" {# name="phoneNumber" #}>
+                        <input id="phoneNumberInput" class="form-control" type="tel" autocomplete="off" {# name="phoneNumber" #}>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                         <label for="passwordInput">Password * <i id="passwordFeedbackI"
                                                                  class="fa fa-warning input-feedback-i"></i></label>
                         <input id="passwordInput" onkeyup="validatePasswords()" class="form-control" type="password"
-                               name="password">
+                               name="password" autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -83,8 +83,7 @@
                         <label for="confirmPasswordInput">Confirm password * <i id="confirmPasswordFeedbackI"
                                                                                 class="fa fa-warning input-feedback-i"></i></label>
                         <input id="confirmPasswordInput" onkeyup="validatePasswords()" class="form-control"
-                               type="password"
-                                {# name="confirmPassword" #}>
+                               type="password" name="passwordConfirm" autocomplete="off" required>
                     </div>
                 </div>
             </div>
