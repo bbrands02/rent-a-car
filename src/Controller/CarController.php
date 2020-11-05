@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\ObjectService;
 
+
 class CarController extends AbstractController
 {
 
@@ -29,12 +30,34 @@ class CarController extends AbstractController
     }
 
     /**
+     * @Route("/cars/{id}")
+     * @Template
+     */
+    public function carAction(Request $req, EntityManagerInterface $em, ObjectService $os, $id)
+    {
+        $variables['car'] = $os->getOne('car', $id);
+        $variables['title'] = $variables['car']->getName();
+
+        return $variables;
+    }
+
+    /**
      * @Route("/upload-car")
      */
     public function uploadCarAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         if ($req->isMethod('POST')) {
             $object = $req->request->all();
+            if (empty($object['name'])) {
+                // Needs to be a flash with a return
+                throw new \Exception('Please fill in the name!');
+            }
+
+            $object['image'] = $req->files->get('image');
+            if (!empty($object['image']) && !in_array($object['image']->guessExtension(), array("png", "jpeg", "gif"))) {
+                // Needs to be a flash with a return
+                throw new \Exception('This is not a image!');
+            }
 
             $os->uploadObject($object);
         }
