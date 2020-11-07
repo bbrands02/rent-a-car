@@ -16,10 +16,10 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="firstNameInput">Given name * <i id="firstNameFeedbackI"
+                        <label for="firstNameInput">First name * <i id="firstNameFeedbackI"
                                                                     class="fa fa-warning input-feedback-i"></i></label>
                         <input id="firstNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="firstName" #}autocomplete="off" required>
+                                 name="firstName" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -27,7 +27,7 @@
                         <label for="middleNameInput">Middle name <i id="middleNameFeedbackI"
                                                                     class="fa fa-warning input-feedback-i"></i></label>
                         <input id="middleNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="middleName" #}autocomplete="off" >
+                                 name="middleName" autocomplete="off" >
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -35,7 +35,7 @@
                         <label for="lastNameInput">Last name * <i id="lastNameFeedbackI"
                                                                   class="fa fa-warning input-feedback-i"></i></label>
                         <input id="lastNameInput" onkeyup="validateText(this)" class="form-control" type="text"
-                                {# name="lastName" #}autocomplete="off" required>
+                                 name="lastName" autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="emailInput">E-mail * <i id="emailFeedbackI"
                                                             class="fa fa-warning input-feedback-i"></i></label>
-                        <input id="emailInput" onkeyup="validateEmail()" class="form-control" type="text" name="email"
+                        <input id="emailInput" onkeyup="validateEmail()" class="form-control" type="text" name="emails[]"
                                autocomplete="off" required>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="phoneNumberInput">Phone number</label>
-                        <input id="phoneNumberInput" class="form-control" type="tel" autocomplete="off" {# name="phoneNumber" #}>
+                        <input id="phoneNumberInput" class="form-control" type="tel" autocomplete="off" name="phoneNumbers[]" >
                     </div>
                 </div>
             </div>
@@ -89,8 +89,6 @@
             </div>
 
             <br>
-
-            <input name="type" type="hidden" value="user">
 
             <div class="form-group">
                 <button class="btn btn-lg btn-primary submit-button" type="submit">
