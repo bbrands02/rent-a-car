@@ -2,6 +2,42 @@
 
 {% block content %}
 
-    <h3 class="mb-3 text-center">Users</h3>
+    <div class="d-flex justify-content-between">
+        <h3 class="mb-3">Users</h3>
+        <form action="{{ path('app_dashboard_user', {'id': 'new'}) }}">
+            <button class="submit-button"><i class="fa fa-plus"></i></button>
+        </form>
+    </div>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if users|default %}
+        {% for user in users %}
+        <tr>
+            <td>{% if user.image|default %}<img src="{{ user.img }}" alt="{{ user.name }}">{% else %}No image{% endif %}</td>
+            <td>{{ user.name }}</td>
+            <td>Customer</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>No users found</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
 
 {% endblock %}
