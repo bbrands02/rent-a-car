@@ -11,8 +11,10 @@
                     {% if app.user is not empty %}
                         <li><a href="{{ path('app_security_user') }}"><i class="fa fa-arrow-right p-2"></i>Profile</a>
                         </li>
-                        <li><a href="{{ path('app_dashboard_index') }}"><i class="fa fa-arrow-right p-2"></i>Dashboard</a>
-                        </li>
+                        {% if app.user.roles|default and 'ROLE_ADMIN' in app.user.roles %}
+                            <li><a href="{{ path('app_dashboard_index') }}"><i class="fa fa-arrow-right p-2"></i>Dashboard</a>
+                            </li>
+                        {% endif %}
                     {% else %}
                         <li><a href="{{ path('app_login') }}"><i class="fa fa-arrow-right p-2"></i>Login</a>
                         </li>
