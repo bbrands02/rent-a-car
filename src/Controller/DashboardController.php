@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Person;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,6 +29,7 @@ class DashboardController extends AbstractController
     public function indexAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $variables['title'] = 'Dashboard';
 
         return $variables;
@@ -40,7 +42,8 @@ class DashboardController extends AbstractController
     public function usersAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $variables['title'] = 'Users';
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $variables['title'] = 'Dashboard | Users';
 
         return $variables;
     }
@@ -52,7 +55,8 @@ class DashboardController extends AbstractController
     public function userAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $variables['title'] = 'User';
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $variables['title'] = 'Dashboard | User';
 
         return $variables;
     }
@@ -64,8 +68,19 @@ class DashboardController extends AbstractController
     public function carsAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $variables['title'] = 'Cars';
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $variables['title'] = 'Dashboard | Cars';
+        $variables['cars'] = $os->getAll('car');
 
+        $variables['breadcrumbs'][] = [
+            'name'=>'Dashboard',
+            'path'=>'/dashboard',
+            'active'=>false
+        ];
+        $variables['breadcrumbs'][] = [
+            'name'=>'Cars',
+            'active'=>true
+        ];
         return $variables;
     }
 
@@ -73,10 +88,38 @@ class DashboardController extends AbstractController
      * @Route("/cars/{id}")
      * @Template
      */
-    public function carAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    public function carAction(Request $req, EntityManagerInterface $em, ObjectService $os, $id)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $variables['title'] = 'Car';
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $variables['title'] = 'Dashboard | Car';
+        if ($id != 'new') {
+            $variables['car'] = $os->getOne('car', $id);
+        } else {
+            $variables['car']['name'] = 'New car';
+        }
+
+        $variables['breadcrumbs'][] = [
+            'name'=>'Dashboard',
+            'path'=>'/dashboard',
+            'active'=>false
+        ];
+        $variables['breadcrumbs'][] = [
+            'name'=>'Cars',
+            'path'=>'/dashboard/cars',
+            'active'=>false
+        ];
+        if ($id != 'new') {
+            $variables['breadcrumbs'][] = [
+                'name' => $variables['car']->getName(),
+                'active' => true
+            ];
+        } else {
+            $variables['breadcrumbs'][] = [
+                'name' => 'New car',
+                'active' => true
+            ];
+        }
 
         return $variables;
     }
