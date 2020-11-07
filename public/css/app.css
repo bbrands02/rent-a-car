@@ -1,12 +1,5 @@
 /* Color palette: https://colorhunt.co/palette/22272 */
-* {
-    box-sizing: border-box;
-    font-family: 'Noto Sans', sans-serif;
-}
 
-*:focus {
-    outline: none;
-}
 
 :root {
     --bg: linear-gradient(45deg, #112d4e, #3f72af);
@@ -22,6 +15,15 @@
     --bg-dark: linear-gradient(#112d4e, #112d4e);
     --primary-bg-dark: #112d4e;
     --primary-color-dark: #a7c1df;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+*:focus {
+    outline: none;
 }
 
 body, #wrapper {
@@ -271,6 +273,16 @@ a:hover {
 }
 
 .custom-entity-bg:hover .custom-card-span {
+    color: var(--primary-color);
+}
+
+.breadcrumb {
+    background: var(--primary-bg);
+    color: var(--primary-color);
+}
+
+.breadcrumb-item, .breadcrumb-item.active {
+    background: var(--primary-bg);
     color: var(--primary-color);
 }
 
