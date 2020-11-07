@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Entity\Car;
 use App\Entity\User;
+use App\Entity\Person;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -90,20 +91,22 @@ class ObjectService extends AbstractController
 //            $this->addFlash('succes', ucwords($type).' successfully created');
 //        };
 
-        return;
+        return $newObject;
     }
 
     public function createProperties($obj)
     {
         $newObject = new $obj['type']();
 
-        // For each possible property this row of if statements needs to be expanded
+        // Universal properties
         if (!empty($obj['name'])) {
             $newObject->setName($obj['name']);
         }
         if (!empty($obj['description'])) {
             $newObject->setDescription($obj['description']);
         }
+
+        // Properties for a Car
         if (!empty($obj['color'])) {
             $newObject->setColor($obj['color']);
         }
@@ -113,11 +116,33 @@ class ObjectService extends AbstractController
             $obj['image'] = 'images/' . $uuid . '.jpg';
             $newObject->setImage($obj['image']);
         }
+
+        // Properties for a User
         if (!empty($obj['email'])) {
             $newObject->setEmail($obj['email']);
         }
         if (!empty($obj['password'])) {
             $newObject->setPassword($this->pe->encodePassword($newObject, $obj['password']));
+        }
+
+        // Properties for a Person
+        if (!empty($obj['firstName'])) {
+            $newObject->setFirstName($obj['firstName']);
+        }
+        if (!empty($obj['middleName'])) {
+            $newObject->setMiddleName($obj['middleName']);
+        }
+        if (!empty($obj['lastName'])) {
+            $newObject->setLastName($obj['lastName']);
+        }
+        if(!empty($obj['emails'])) {
+            $newObject->setEmails($obj['emails']);
+        }
+        if(!empty($obj['phoneNumbers'])) {
+            $newObject->setPhoneNumbers($obj['phoneNumbers']);
+        }
+        if (!empty($obj['user'])) {
+            $newObject->setUser($obj['user']);
         }
 
         return $newObject;
