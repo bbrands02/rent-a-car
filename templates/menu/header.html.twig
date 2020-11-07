@@ -11,8 +11,10 @@
                 {% if app.user is not null %}
                     <li class="user-link"><i style="padding-left: 10px" class="fa fa-user"></i> <a
                                 href="{{ path('app_security_user') }}">Profile</a></li>
+                    {% if app.user.roles|default and 'ROLE_ADMIN' in app.user.roles %}
                     <li class="user-link"><i style="padding-left: 10px" class="fa fa-line-chart"></i> <a
                                 href="{{ path('app_dashboard_index') }}">Dashboard</a></li>
+                    {% endif %}
                     <li class="user-link"><a href="{{ path('app_logout') }}">Logout</a></li>
                 {% else %}
                     <li class="user-link"><a href="{{ path('app_login') }}">Login</a></li>

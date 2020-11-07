@@ -38,6 +38,16 @@ class CarController extends AbstractController
         $variables['car'] = $os->getOne('car', $id);
         $variables['title'] = $variables['car']->getName();
 
+        $variables['breadcrumbs'][] = [
+            'name'=>'Cars',
+            'path'=>'/cars',
+            'active'=>false
+        ];
+        $variables['breadcrumbs'][] = [
+            'name'=>$variables['car']->getName(),
+            'active'=>true
+        ];
+
         return $variables;
     }
 

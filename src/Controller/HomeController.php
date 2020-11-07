@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      */
     public function indexAction(Request $req, EntityManagerInterface $em, ObjectService $os)
     {
-        $variables['title'] = "Dashboard";
+        $variables['title'] = "Home";
         $variables['cars'] = $os->getAll('car');
 
         return $variables;
