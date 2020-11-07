@@ -10,24 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\ObjectService;
+use App\Entity\User;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * @Template
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils)
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('app_security_user');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_security_user');
+        }
+        $variables['title'] = 'Login';
 
         // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        $variables['error'] = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $variables['lastUsername'] = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', $variables);
     }
 
     /**
@@ -56,7 +59,8 @@ class SecurityController extends AbstractController
      * @Route("/me")
      * @Template
      */
-    public function userAction() {
+    public function userAction()
+    {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $variables['title'] = 'Profile';
 
@@ -66,7 +70,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/create-user")
      */
-    public function makeUserAction(Request $req, EntityManagerInterface $em, ObjectService $os) {
+    public function makeUserAction(Request $req, EntityManagerInterface $em, ObjectService $os)
+    {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_security_user');
         }
@@ -74,9 +79,34 @@ class SecurityController extends AbstractController
         if ($req->isMethod('POST')) {
             $object = $req->request->all();
 
-            if(!empty($object['email']) && !empty($object['password']) && !empty($object['passwordConfirm'])) {
-                if($object['password'] === $object['passwordConfirm']) {
-                    $os->uploadObject($object);
+            if (isset($object['firstName']) && !empty($object['firstName'])
+                && isset($object['lastName']) && !empty($object['lastName'])
+                && isset($object['emails']) && !empty($object['emails'])
+                && isset($object['password']) && !empty($object['password'])
+                && isset($object['passwordConfirm']) && !empty($object['passwordConfirm'])) {
+
+                if ($object['password'] === $object['passwordConfirm']) {
+
+                    // Make User
+                    $user['type'] = 'User';
+                    $user['email'] = $object['emails'][0];
+                    $user['password'] = $object['password'];
+
+                    $user = $os->uploadObject($user);
+
+                    // Make Person
+                    $person['type'] = 'Person';
+                    $person['firstName'] = $object['firstName'];
+                    if (!empty($object['middleName'])) {
+                        $person['middleName'] = $object['middleName'];
+                    }
+                    $person['lastName'] = $object['lastName'];
+                    $person['emails'] = $object['emails'];
+                    $person['phoneNumbers'] = $object['phoneNumbers'];
+                    $person['user'] = $user;
+
+                    $os->uploadObject($person);
+
                 } else {
                     throw new \Exception('Please make sure the passwords are identical.');
                 }
